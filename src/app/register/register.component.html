@@ -1,0 +1,53 @@
+<div class="content">
+  <mat-card class="card" appearance="outlined">
+    <mat-card-header class="header">
+      <mat-card-title>Register</mat-card-title>
+      <mat-card-subtitle>Fill in the form to register</mat-card-subtitle>
+    </mat-card-header>
+  <mat-form-field appearance="outline">
+    <mat-label>First Name</mat-label>
+    <input matInput placeholder="First Name">
+    <mat-icon matSuffix>person</mat-icon>
+  </mat-form-field >
+  <mat-form-field appearance="outline">
+    <mat-label>Last Name</mat-label>
+    <input matInput placeholder="Last Name">
+    <mat-icon matSuffix>person</mat-icon>
+  </mat-form-field >
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="Email">
+    <mat-icon matSuffix>email</mat-icon>
+  </mat-form-field >
+  <mat-form-field appearance="outline">
+    <mat-label>Enter your password</mat-label>
+    <input matInput [type]="hide() ? 'password' : 'text'" />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="clickEvent($event)"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide()"
+    >
+      <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Repeat your password</mat-label>
+    <input matInput [type]="hide() ? 'password' : 'text'" />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="clickEvent($event)"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide()"
+    >
+      <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+    <div  class="buttons">
+      <button (click)="openDialog()" routerLink="/home" mat-stroked-button>Register</button>
+      <button routerLink="/register" mat-raised-button>Clear</button>
+    </div>
+  </mat-card>
+</div>

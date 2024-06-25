@@ -1,0 +1,17 @@
+.content{
+  background-image: url("../assats/videoBg.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  .buttonsAction{
+    position: absolute;
+    top: 50%;
+    left: 10%;
+  }
+  app-video{
+    position: absolute;
+    top: 70%;
+  }
+}
