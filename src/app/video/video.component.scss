@@ -1,9 +1,15 @@
 .content{
   width: 100vw;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 10;
-  background-color: rgba(30, 26, 29, 0.5);
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 100%,rgba(0,0,0,5) 90%);
   mat-card{
+    background-image: url("../../assats/videoBg.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
     margin: 20px;
     width: 300px;
     height: 300px;
@@ -11,5 +17,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    position: relative;
+    top: 50px;
   }
+
 }
