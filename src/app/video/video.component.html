@@ -1,41 +1,26 @@
 <div class="content">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>{{video.title}}</mat-card-title>
-      <mat-card-subtitle>{{video.year}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>{{video.description}}</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-stroked-button><mat-icon>play_arrow</mat-icon> Play</button>
-      <button mat-stroked-button><mat-icon>add</mat-icon> My List</button>
-    </mat-card-actions>
-  </mat-card>
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>{{video.title}}</mat-card-title>
-      <mat-card-subtitle>{{video.year}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>{{video.description}}</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-stroked-button><mat-icon>play_arrow</mat-icon> Play</button>
-      <button mat-stroked-button><mat-icon>add</mat-icon> My List</button>
-    </mat-card-actions>
-  </mat-card>
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>{{video.title}}</mat-card-title>
-      <mat-card-subtitle>{{video.year}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>{{video.description}}</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-stroked-button><mat-icon>play_arrow</mat-icon> Play</button>
-      <button mat-stroked-button><mat-icon>add</mat-icon> My List</button>
-    </mat-card-actions>
-  </mat-card>
+  <div class="slider-container">
+    <button mat-button (click)="prev()">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <div class="slider">
+      <mat-card *ngFor="let video of getVisibleVideos()">
+        <mat-card-header>
+          <mat-card-title>{{ video.title }}</mat-card-title>
+          <mat-card-subtitle>{{ video.year }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ video.description }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>View</button>
+          <button mat-button>Share</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <button mat-button (click)="next()">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+
 </div>
