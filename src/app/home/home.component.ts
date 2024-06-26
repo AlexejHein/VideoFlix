@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import {MatIcon} from "@angular/material/icon";
+import {MatIcon, MatIconModule} from "@angular/material/icon";
 import {MatButton} from "@angular/material/button";
 import {VideoComponent} from "../video/video.component";
+import {FooterComponent} from "../footer/footer.component";
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,8 @@ import {VideoComponent} from "../video/video.component";
   imports: [
     MatIcon,
     MatButton,
-    VideoComponent
+    VideoComponent,
+    FooterComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
