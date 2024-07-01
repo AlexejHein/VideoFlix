@@ -25,6 +25,7 @@
     "@angular/ssr": "^18.0.5",
     "express": "^4.18.2",
     "ngx-owl-carousel-o": "^18.0.0",
+    "ngx-videogular2": "^9.0.2",
     "rxjs": "~7.8.0",
     "swiper": "^11.1.4",
     "tslib": "^2.3.0",

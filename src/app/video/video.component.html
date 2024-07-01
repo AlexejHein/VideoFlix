@@ -1,4 +1,5 @@
-<div class="content">
+<!-- video.component.html -->
+<div class="content" *ngIf="videos.length > 0">
   <div class="slider-container">
     <button mat-button (click)="prev()">
       <mat-icon>chevron_left</mat-icon>
@@ -7,14 +8,18 @@
       <mat-card *ngFor="let video of getVisibleVideos()">
         <mat-card-header>
           <mat-card-title>{{ video.title }}</mat-card-title>
-          <mat-card-subtitle>{{ video.year }}</mat-card-subtitle>
+          <mat-card-subtitle>{{ video.uploaded_at | date:'yyyy' }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
           <p>{{ video.description }}</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-stroked-button><mat-icon>play_arrow</mat-icon> Play</button>
-          <button mat-stroked-button><mat-icon>add</mat-icon> My List</button>
+          <button mat-stroked-button (click)="playVideo(video, $event)">
+            <mat-icon>play_arrow</mat-icon> Play
+          </button>
+          <button mat-stroked-button>
+            <mat-icon>add</mat-icon> My List
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>
@@ -22,4 +27,28 @@
       <mat-icon>chevron_right</mat-icon>
     </button>
   </div>
+</div>
+<div *ngIf="videos.length === 0">
+  <p>No videos available.</p>
+</div>
+
+<!-- Video Player Modal -->
+<div *ngIf="selectedVideoUrl" class="video-player-modal">
+  <vg-player>
+    <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
+      <source [src]="selectedVideoUrl" type="video/mp4">
+    </video>
+    <vg-overlay-play></vg-overlay-play>
+    <vg-controls>
+      <vg-play-pause></vg-play-pause>
+      <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+      <vg-scrub-bar>
+        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+      </vg-scrub-bar>
+      <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+      <vg-volume></vg-volume>
+    </vg-controls>
+    <vg-buffering></vg-buffering>
+  </vg-player>
+  <button mat-button (click)="closePlayer()">Close</button>
 </div>

@@ -1,3 +1,4 @@
+// video.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -23,4 +24,5 @@ export class VideoService {
     return this.http.get<Video[]>(this.apiUrl);
   }
 }
+
 

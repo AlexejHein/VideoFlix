@@ -5,6 +5,7 @@ import {HomeComponent} from "./home/home.component";
 import {ForgotComponent} from "./forgot/forgot.component";
 import {ImprintComponent} from "./imprint/imprint.component";
 import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
+import {VideoComponent} from "./video/video.component";
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -13,4 +14,5 @@ export const routes: Routes = [
   { path: 'forgot', component: ForgotComponent },
   { path: 'imprint', component: ImprintComponent },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
+  { path: '', component: VideoComponent }
 ];
