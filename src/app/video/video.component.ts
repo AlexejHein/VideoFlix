@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { VideoService, Video } from '../services/video.service';
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
-import {DatePipe, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
-import {VgBufferingModule, VgControlsModule, VgCoreModule, VgOverlayPlayModule} from "ngx-videogular2";
+import { DatePipe, NgForOf, NgIf, NgOptimizedImage } from "@angular/common";
+import videojs from 'video.js';
 
 @Component({
   selector: 'app-video',
@@ -15,17 +16,17 @@ import {VgBufferingModule, VgControlsModule, VgCoreModule, VgOverlayPlayModule} 
     MatIconModule,
     NgForOf,
     NgOptimizedImage,
-    VgCoreModule,
-    VgOverlayPlayModule,
-    VgControlsModule,
-    VgBufferingModule,
     DatePipe,
-    NgIf
+    NgIf,
+    HttpClientModule  // Importieren Sie HttpClientModule hier
   ],
   templateUrl: './video.component.html',
-  styleUrls: ['./video.component.scss']
+  styleUrls: ['./video.component.scss'],
+  providers: [VideoService]  // Stellen Sie sicher, dass der Service hier bereitgestellt wird
 })
-export class VideoComponent implements OnInit {
+export class VideoComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('videoPlayer', { static: true }) videoPlayer!: ElementRef;
+  player!: any;
   videos: Video[] = [];
   currentIndex = 0;
   visibleCount = 3;
@@ -37,6 +38,26 @@ export class VideoComponent implements OnInit {
     this.videoService.getVideos().subscribe(data => {
       this.videos = data;
     });
+  }
+
+  ngAfterViewInit() {
+    this.initPlayer();
+  }
+
+  ngOnDestroy() {
+    if (this.player) {
+      this.player.dispose();
+    }
+  }
+
+  initPlayer() {
+    if (this.videoPlayer) {
+      this.player = videojs(this.videoPlayer.nativeElement, {
+        controls: true,
+        autoplay: false,
+        preload: 'auto',
+      });
+    }
   }
 
   getVisibleVideos() {
@@ -60,9 +81,15 @@ export class VideoComponent implements OnInit {
   playVideo(video: Video, event: Event) {
     event.stopPropagation();
     this.selectedVideoUrl = video.file_url;
+    this.initPlayer();
+    this.player.src({ type: 'video/mp4', src: this.selectedVideoUrl });
+    this.player.play();
   }
 
   closePlayer() {
+    if (this.player) {
+      this.player.pause();
+    }
     this.selectedVideoUrl = null;
   }
 }

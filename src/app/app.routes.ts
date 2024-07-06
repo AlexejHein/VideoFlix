@@ -14,5 +14,5 @@ export const routes: Routes = [
   { path: 'forgot', component: ForgotComponent },
   { path: 'imprint', component: ImprintComponent },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
-  { path: '', component: VideoComponent }
+  { path: 'video', component: VideoComponent }
 ];

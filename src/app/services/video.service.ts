@@ -4,12 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Video {
-  id: number;
+  id: string;
   title: string;
   description: string;
+  thumbnail_url: string; // Fügen Sie dieses Feld hinzu
   file_url: string;
-  uploaded_at: string;
-  user: number;
+  uploaded_at: Date;
 }
 
 @Injectable({

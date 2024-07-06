@@ -9,7 +9,15 @@ import { VideoComponent } from './video/video.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatToolbar, DataRowOutlet, RouterLink, MatIcon, RouterModule, VideoComponent],
+  imports: [
+    RouterOutlet,
+    MatToolbar,
+    DataRowOutlet,
+    RouterLink,
+    MatIcon,
+    RouterModule,
+    VideoComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
