@@ -18,11 +18,11 @@ import videojs from 'video.js';
     NgOptimizedImage,
     DatePipe,
     NgIf,
-    HttpClientModule  // Importieren Sie HttpClientModule hier
+    HttpClientModule
   ],
   templateUrl: './video.component.html',
   styleUrls: ['./video.component.scss'],
-  providers: [VideoService]  // Stellen Sie sicher, dass der Service hier bereitgestellt wird
+  providers: [VideoService]
 })
 export class VideoComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('videoPlayer', { static: true }) videoPlayer!: ElementRef;
@@ -83,15 +83,27 @@ export class VideoComponent implements OnInit, OnDestroy, AfterViewInit {
   playVideo(video: Video, event: Event) {
     event.stopPropagation();
     console.log('Video object:', video);
-    this.selectedVideoUrl = video.file; // Aktualisieren Sie dies auf `video.file`
+    this.selectedVideoUrl = video.file; // Verwenden Sie `video.file`
     console.log('Playing video:', this.selectedVideoUrl);
     if (!this.player) {
       this.initPlayer();
     }
     if (this.player) {
       this.player.src({ type: 'video/mp4', src: this.selectedVideoUrl });
-      this.player.play();
-      console.log('Video started');
+      this.player.ready(() => {
+        this.tryToPlayVideo();
+      });
+    }
+  }
+
+  tryToPlayVideo() {
+    const playPromise = this.player.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        console.log('Video started automatically');
+      }).catch((error: any) => {
+        console.log('Video play error:', error);
+      });
     }
   }
 

@@ -37,5 +37,5 @@
   <video #videoPlayer class="video-js vjs-default-skin" controls preload="auto" width="640" height="264">
     <source [src]="selectedVideoUrl" type="video/mp4">
   </video>
-  <button mat-button (click)="closePlayer()">Close</button>
+  <button class="close-btn" (click)="closePlayer()">Close</button>
 </div>

@@ -22,7 +22,7 @@
 }
 
 mat-card {
-  position: relative; // Hinzufügen der position-Eigenschaft
+  position: relative;
   background-image: url("../../assats/videoBg.webp");
   background-size: cover;
   background-repeat: no-repeat;
@@ -39,17 +39,51 @@ mat-card {
     cursor: pointer;
     transform: scale(1.5);
     z-index: 1;
+
     mat-card-header {
       display: none;
     }
-    mat-card-content{
+
+    mat-card-content {
       display: none;
     }
-    button{
+
+    button {
       font-size: 10px;
       color: #1e1a1d;
     }
   }
 }
 
+.video-player-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8); // Optional: fügt einen dunklen Hintergrund hinzu
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
 
+.video-js {
+  width: 100%;
+  height: 100%;
+}
+
+button.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.8);
+  }
+}
