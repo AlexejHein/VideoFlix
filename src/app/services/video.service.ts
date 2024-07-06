@@ -8,7 +8,7 @@ export interface Video {
   title: string;
   description: string;
   thumbnail_url: string; // Fügen Sie dieses Feld hinzu
-  file_url: string;
+  file: string;
   uploaded_at: Date;
 }
 

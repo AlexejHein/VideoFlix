@@ -37,6 +37,7 @@ export class VideoComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
     this.videoService.getVideos().subscribe(data => {
       this.videos = data;
+      console.log('Videos loaded:', this.videos);
     });
   }
 
@@ -57,6 +58,7 @@ export class VideoComponent implements OnInit, OnDestroy, AfterViewInit {
         autoplay: false,
         preload: 'auto',
       });
+      console.log('Player initialized');
     }
   }
 
@@ -80,10 +82,17 @@ export class VideoComponent implements OnInit, OnDestroy, AfterViewInit {
 
   playVideo(video: Video, event: Event) {
     event.stopPropagation();
-    this.selectedVideoUrl = video.file_url;
-    this.initPlayer();
-    this.player.src({ type: 'video/mp4', src: this.selectedVideoUrl });
-    this.player.play();
+    console.log('Video object:', video);
+    this.selectedVideoUrl = video.file; // Aktualisieren Sie dies auf `video.file`
+    console.log('Playing video:', this.selectedVideoUrl);
+    if (!this.player) {
+      this.initPlayer();
+    }
+    if (this.player) {
+      this.player.src({ type: 'video/mp4', src: this.selectedVideoUrl });
+      this.player.play();
+      console.log('Video started');
+    }
   }
 
   closePlayer() {
