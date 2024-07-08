@@ -4,8 +4,7 @@
       <mat-icon>chevron_left</mat-icon>
     </button>
     <div class="slider">
-      <mat-card *ngFor="let video of getVisibleVideos()">
-        <img mat-card-image [src]="video.thumbnail_url" alt="{{ video.title }}">
+      <mat-card *ngFor="let video of getVisibleVideos()" [style.background-image]="'url(' + video.thumbnail_url + ')'">
         <mat-card-header>
           <mat-card-title>{{ video.title }}</mat-card-title>
           <mat-card-subtitle>{{ video.uploaded_at | date:'yyyy' }}</mat-card-subtitle>
