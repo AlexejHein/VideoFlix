@@ -5,14 +5,18 @@
   background-position: center;
   height: 100vh;
   display: flex;
+  overflow: hidden;
   .buttonsAction{
+    max-width: 90%;
     position: absolute;
     top: 50%;
     left: 10%;
+    p{
+      width: 60%;
+    }
   }
   app-video{
     position: absolute;
-    top: 70%;
+    top: 80%;
   }
-
 }

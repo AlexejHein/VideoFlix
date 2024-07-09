@@ -6,4 +6,19 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   color: white;
   background-color: #1e1a1d;
+  overflow-x: hidden;
+}
+/* Für WebKit-basierte Browser */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Für Firefox */
+body {
+  scrollbar-width: none;
+}
+
+/* Für IE und Edge */
+body {
+  -ms-overflow-style: none;
 }
