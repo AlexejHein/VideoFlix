@@ -35,10 +35,15 @@ export class VideoComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(private videoService: VideoService) { }
 
   ngOnInit(): void {
-    this.videoService.getVideos().subscribe(data => {
-      this.videos = data;
-      console.log('Videos loaded:', this.videos);
-    });
+    this.videoService.getVideos().subscribe(
+      data => {
+        this.videos = data;
+        console.log('Videos loaded:', this.videos);
+      },
+      error => {
+        console.error('Error loading videos:', error);
+      }
+    );
   }
 
   ngAfterViewInit() {

@@ -1,13 +1,13 @@
-// video.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 export interface Video {
   id: string;
   title: string;
   description: string;
-  thumbnail_url: string; // Fügen Sie dieses Feld hinzu
+  thumbnail_url: string;
   file: string;
   uploaded_at: Date;
 }
@@ -18,11 +18,10 @@ export interface Video {
 export class VideoService {
   private apiUrl = 'http://127.0.0.1:8000/api/videos/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   getVideos(): Observable<Video[]> {
-    return this.http.get<Video[]>(this.apiUrl);
+    const headers = this.authService.getAuthHeaders();
+    return this.http.get<Video[]>(this.apiUrl, { headers });
   }
 }
-
-

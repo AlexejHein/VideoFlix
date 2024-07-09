@@ -1,14 +1,13 @@
-import { Component, signal} from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatCardModule} from "@angular/material/card";
-import { MatFormField} from "@angular/material/form-field";
-import { MatInput} from "@angular/material/input";
-import { MatIcon} from "@angular/material/icon";
-import { MatButton, MatIconButton} from "@angular/material/button";
-import { MatCard, MatCardHeader} from "@angular/material/card";
-import { RouterLink} from "@angular/router";
-
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterModule, Router } from '@angular/router';
+import { trigger, state, style, animate, transition } from '@angular/animations';
+import { AuthService } from '../services/auth.service';
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -17,23 +16,47 @@ import { RouterLink} from "@angular/router";
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
-    MatFormField,
-    MatInput,
-    MatIcon,
-    MatIconButton,
-    MatCard,
-    MatButton,
-    RouterLink,
-    MatCardHeader,
+    MatIconModule,
+    MatButtonModule,
+    RouterModule,
+    FormsModule
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrls: ['./login.component.scss'],
+  animations: [
+    trigger('transitionMessages', [
+      state('void', style({
+        opacity: 0
+      })),
+      transition(':enter, :leave', [
+        animate(300)
+      ])
+    ])
+  ]
 })
 export class LoginComponent {
+  credentials = {
+    email: '',
+    password: ''
+  };
+
+  constructor(private authService: AuthService, private router: Router) { }
+
+  login() {
+    this.authService.login(this.credentials).subscribe(
+      response => {
+        console.log('Login successful', response);
+        this.router.navigate(['/videos']).then(r => {});
+      },
+      error => {
+        console.log('Login failed', error);
+      }
+    );
+  }
 
   hide = signal(true);
   clickEvent(event: MouseEvent) {
-    this.hide.set(!this.hide);
+    this.hide.set(!this.hide());
     event.stopPropagation();
   }
 }
