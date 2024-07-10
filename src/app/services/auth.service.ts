@@ -47,6 +47,7 @@ export class AuthService {
 
   private removeToken(): void {
     if (isPlatformBrowser(this.platformId)) {
+      console.log('Removing token');
       localStorage.removeItem(this.tokenKey);
     }
   }

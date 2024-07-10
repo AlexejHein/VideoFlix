@@ -28,8 +28,15 @@ export class AppComponent {
   constructor(private authService: AuthService, private router: Router) { }
 
   logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']).then(r => {});
-
+    this.authService.logout().subscribe({
+      next: () => {
+        // Nach erfolgreichem Logout den Benutzer zur Login-Seite umleiten
+        this.router.navigate(['/login']).then(r => {});
+      },
+      error: (error) => {
+        // Fehlerbehandlung, falls nötig
+        console.error('Logout failed', error);
+      }
+    });
   }
 }
