@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterOutlet} from '@angular/router';
 import {MatToolbar} from "@angular/material/toolbar";
 import {DataRowOutlet} from "@angular/cdk/table";
@@ -6,6 +6,7 @@ import {MatIcon} from "@angular/material/icon";
 import { RouterModule } from '@angular/router';
 import { VideoComponent } from './video/video.component';
 import { AuthService} from "./services/auth.service";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-root',
@@ -17,26 +18,28 @@ import { AuthService} from "./services/auth.service";
     RouterLink,
     MatIcon,
     RouterModule,
-    VideoComponent
+    VideoComponent,
+    NgIf
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'VideoFlix';
+  isUserLoggedIn = true;
 
   constructor(private authService: AuthService, private router: Router) { }
 
+  ngOnInit() {
+    this.isUserLoggedIn = this.authService.isLoggedIn();
+  }
+
   logout() {
-    this.authService.logout().subscribe({
-      next: () => {
-        // Nach erfolgreichem Logout den Benutzer zur Login-Seite umleiten
-        this.router.navigate(['/login']).then(r => {});
-      },
-      error: (error) => {
-        // Fehlerbehandlung, falls nötig
-        console.error('Logout failed', error);
-      }
+    this.authService.logout();
+    this.router.navigate(['/login']).then(() => {
+      this.isUserLoggedIn = false;
     });
   }
+
+
 }
