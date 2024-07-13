@@ -2,7 +2,7 @@
   <span>VideoFlix</span>
 
   <div class="nav">
-    <a *ngIf="!isUserLoggedIn" routerLink="/register"><mat-icon>login</mat-icon></a>
+    <a *ngIf="!isUserLoggedIn" routerLink="/login"><mat-icon>login</mat-icon></a>
     <a *ngIf="isUserLoggedIn" (click)="logout()"><mat-icon>logout</mat-icon></a>
   </div>
 </mat-toolbar>

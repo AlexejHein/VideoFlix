@@ -22,11 +22,11 @@ import {NgIf} from "@angular/common";
     NgIf
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
   title = 'VideoFlix';
-  isUserLoggedIn = true;
+  isUserLoggedIn = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -40,6 +40,4 @@ export class AppComponent implements OnInit{
       this.isUserLoggedIn = false;
     });
   }
-
-
 }
