@@ -43,6 +43,7 @@ export class RegisterComponent {
   constructor(public dialog: MatDialog, private router: Router, private authService: AuthService) { }
 
   register() {
+    console.log('Registering user:', this.user);
     this.authService.register(this.user).subscribe(
       response => {
         console.log('Registration successful', response);
