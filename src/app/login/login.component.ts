@@ -7,7 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterModule, Router } from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { AuthService } from '../services/auth.service';
-import {FormsModule} from "@angular/forms";
+import { FormsModule } from '@angular/forms';
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ import {FormsModule} from "@angular/forms";
     MatIconModule,
     MatButtonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    NgIf
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
@@ -39,6 +41,7 @@ export class LoginComponent {
     email: '',
     password: ''
   };
+  errorMessage: string | null = null;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -47,9 +50,11 @@ export class LoginComponent {
       response => {
         console.log('Login successful', response);
         this.router.navigate(['/videos']).then(r => {});
+        this.errorMessage = null; // Clear error message on success
       },
       error => {
         console.log('Login failed', error);
+        this.errorMessage = 'Login failed. Please try again.';
       }
     );
   }
